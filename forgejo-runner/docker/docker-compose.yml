@@ -1,0 +1,28 @@
+services:
+  docker:
+    image: docker:dind
+    privileged: true
+    environment:
+      - DOCKER_TLS_CERTDIR=/certs
+    volumes:
+      - certs:/certs
+    expose:
+      - 2376
+    ports:
+      - "2376:2376"
+
+  runner:
+    image: code.forgejo.org/forgejo/runner:3.5.1
+    depends_on:
+      - docker
+    environment:
+      DOCKER_HOST: tcp://docker:2376
+      DOCKER_TLS_VERIFY: 1
+      DOCKER_CERT_PATH: /certs/client
+    volumes:
+      - /opt/forgejo-runner:/data
+      - certs:/certs
+    command: 'forgejo-runner --config config.yml daemon'
+
+volumes:
+  certs:
