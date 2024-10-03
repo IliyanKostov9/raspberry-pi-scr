@@ -13,8 +13,9 @@ docker run -v /var/run/docker.sock:/var/run/docker.sock  -v /home/pi/docker:/dat
 
 docker run -v /var/run/docker.sock:/var/run/docker.sock  -v /home/pi/docker:/data --rm code.forgejo.org/forgejo/runner: forgejo-runner generate-config > config.yml
 
-sudo mv ./.runner /opt/forgejo-runner
-sudo mv ./config.yml /opt/forgejo-runner
-sudo chown -R 1000:1000 /opt/forgejo-runner
+sudo mkdir -p /opt/forgejo-runner/$NAME
+sudo mv ./.runner /opt/forgejo-runner/$NAME
+sudo mv ./config.yml /opt/forgejo-runner/$NAME
+sudo chown -R 1000:1000 /opt/forgejo-runner/$NAME
 
 echo "Runner setup done! Now you can run docker-compose up -d to start the containers"

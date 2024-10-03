@@ -8,10 +8,11 @@ services:
       - certs:/certs
     expose:
       - 2376
+      - 8080
     ports:
       - "2376:2376"
 
-  runner:
+  portfolio-runner:
     image: code.forgejo.org/forgejo/runner:3.5.1
     depends_on:
       - docker
@@ -20,7 +21,7 @@ services:
       DOCKER_TLS_VERIFY: 1
       DOCKER_CERT_PATH: /certs/client
     volumes:
-      - /opt/forgejo-runner:/data
+      - /opt/forgejo-runner/portfolio:/data
       - certs:/certs
     command: 'forgejo-runner --config config.yml daemon'
 
