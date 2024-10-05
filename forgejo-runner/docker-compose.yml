@@ -12,7 +12,7 @@ services:
     ports:
       - "2376:2376"
 
-  portfolio-runner:
+  portfolio-runner-1:
     image: code.forgejo.org/forgejo/runner:3.5.1
     depends_on:
       - docker
@@ -21,7 +21,20 @@ services:
       DOCKER_TLS_VERIFY: 1
       DOCKER_CERT_PATH: /certs/client
     volumes:
-      - /opt/forgejo-runner/portfolio:/data
+      - /opt/forgejo-runner/portfolio/1:/data
+      - certs:/certs
+    command: 'forgejo-runner --config config.yml daemon'
+
+  portfolio-runner-2:
+    image: code.forgejo.org/forgejo/runner:3.5.1
+    depends_on:
+      - docker
+    environment:
+      DOCKER_HOST: tcp://docker:2376
+      DOCKER_TLS_VERIFY: 1
+      DOCKER_CERT_PATH: /certs/client
+    volumes:
+      - /opt/forgejo-runner/portfolio/2:/data
       - certs:/certs
     command: 'forgejo-runner --config config.yml daemon'
 

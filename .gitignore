@@ -162,3 +162,5 @@ cython_debug/
 
 .runner
 config.yml
+.txt
+acme.json
