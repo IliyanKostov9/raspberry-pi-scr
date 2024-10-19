@@ -108,11 +108,13 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 alias bathelp='batcat --plain --language=help'
-alias kubectl="microk8s kubectl"
+
+alias kc="microk8s kubectl"
 alias helm="microk8s helm"
 alias dc="docker"
 alias dcc="docker compose"
 alias cat="batcat --theme=base16-256"
+alias clip="xclip -selection clipboard"
 
 alias bz="selection=\$(find . -type f -o -type d | fzf --cycle --border=thinblock --border-label='| Search here |' --preview 'batcat --color=always --style=numbers --theme=base16-256 --line-range=:500 {} || tree -C {}' --preview-label='Preview'); if [ -d \"\$selection\" ]; then cd \"\$selection\"; else cd \"\$(dirname \"\$selection\")\"; fi";
 

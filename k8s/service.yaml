@@ -7,14 +7,14 @@ metadata:
     degree: phd
     version: v1
 
-  spec:
-    type: NodePort
-    sessionAffinity: None
-    selector:
-      degree: phd
-      version: v1
-    ports:
-      - port: 5432
- 	protcol: TCP
-        targetPort: 5432
+spec:
+  type: NodePort
+  sessionAffinity: None
+  selector:
+    degree: phd
+    version: v1
+  ports:
+    - port: 5432
+      protocol: TCP
+      targetPort: 5432
 

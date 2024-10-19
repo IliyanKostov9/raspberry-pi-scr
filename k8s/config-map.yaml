@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: tuvarna-service
+  namespace: tuvarna
+  labels:
+    degree: phd
+    version: v1
+
+data:
+ FOO: TEST 
+

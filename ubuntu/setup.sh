@@ -1,6 +1,12 @@
 sudo apt-get update
 sudo apt upgrade -y
-sudo apt install -y zsh vim fzf make bat vim-gtk3
+sudo apt install -y \
+	zsh \ 
+	vim \
+	fzf \
+	make \
+	bat \
+	tree
 
 echo "Now making a setup for docker..."
 sudo apt-get install ca-certificates curl

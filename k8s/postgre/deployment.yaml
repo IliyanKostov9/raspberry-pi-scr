@@ -1,0 +1,77 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tuvarna-db
+  namespace: tuvarna
+  labels: 
+    degree: phd
+    type: database
+    version: v1
+    
+spec:
+  replicas: 1
+  minReadySeconds: 10
+  selector:
+    matchLabels:
+      degree: phd
+      type: database
+      version: v1
+
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+
+  template:
+    metadata:
+      labels:
+        degree: phd
+        type: database
+        version: v1
+
+    spec:
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+
+      volumes:
+        - name: postgre-vol
+          persistentVolumeClaim:
+            claimName: postgre-per-vol
+     
+      containers:
+        - name: postgre
+          image: postgres:13.16-bookworm
+          imagePullPolicy: IfNotPresent
+          
+          ports:
+            - containerPort: 5432
+
+          resources:
+            requests:
+              cpu: 1
+              memory: 256Mi
+            limits:
+              cpu: 2.2
+              memory: 2Gi
+
+          env:
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: tuvarna-secrets
+                  key: POSTGRES_USER
+
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: tuvarna-secrets
+                  key: POSTGRES_PASSWORD
+
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  name: tuvarna-secrets
+                  key: POSTGRES_DB
+
+

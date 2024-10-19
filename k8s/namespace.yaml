@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: tuvarna
+  labels:
+    version: v1
+    env: prod
