@@ -164,3 +164,6 @@ cython_debug/
 config.yml
 .txt
 acme.json
+passbolt/traefik.yaml
+passbolt/config
+passbolt/share
