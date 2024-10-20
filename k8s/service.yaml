@@ -8,13 +8,23 @@ metadata:
     version: v1
 
 spec:
-  type: NodePort
-  sessionAffinity: None
+  type: LoadBalancer
+
   selector:
     degree: phd
+    type: database
     version: v1
+
   ports:
-    - port: 5432
+    - name: postgres
+      port: 5432
       protocol: TCP
       targetPort: 5432
+      nodePort: 30000
+
+  
+#status:
+#  loadBalancer:
+#    ingress:
+#      - ip: 192.0.2.127
 

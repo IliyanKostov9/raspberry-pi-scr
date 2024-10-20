@@ -74,4 +74,3 @@ spec:
                   name: tuvarna-secrets
                   key: POSTGRES_DB
 
-
